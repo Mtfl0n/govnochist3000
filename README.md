@@ -1,2 +1,2 @@
 # govnochist3000
-it is planned to do:
+я не доделал это дерьмо
