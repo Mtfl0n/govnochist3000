@@ -56,7 +56,6 @@ void MainWindow::on_comboBox_activated(int index) {
     if (selectedPath == "Выбрать папку...") {
         QString dir = QFileDialog::getExistingDirectory(this, "Выберите папку", QDir::homePath());
         if (!dir.isEmpty()) {
-            // Добавляем папку в комбобокс, если её ещё нет
             if (ui->comboBox->findText(dir) == -1) {
                 ui->comboBox->insertItem(ui->comboBox->count() - 1, dir);
             }
@@ -79,21 +78,21 @@ void MainWindow::populateDrives() {
     for (const QFileInfo& drive : std::as_const(drives)) {
         ui->comboBox->addItem(drive.absoluteFilePath());
     }
-    ui->comboBox->addItem("Выбрать папку..."); // Специальный пункт для диалога
+    ui->comboBox->addItem("Выбрать папку..."); 
 }
 
 void MainWindow::addDirectory(const QString& path) {
     QFileInfo info(path);
-    QString parentPath = info.dir().absolutePath();// Родительский путь
+    QString parentPath = info.dir().absolutePath();
 
     QTreeWidgetItem* parentItem = dirItems.value(parentPath);
-    if (!parentItem) parentItem = dirItems.value(path); // Для корня
+    if (!parentItem) parentItem = dirItems.value(path);
 
 
     QTreeWidgetItem* item = new QTreeWidgetItem(parentItem);
-    item->setText(0, info.fileName());// Имя директории (без полного пути)
-    item->setChildIndicatorPolicy(QTreeWidgetItem::ShowIndicator); // Плюсик
-    dirItems[path] = item;// Добавляем в мапу
+    item->setText(0, info.fileName());
+    item->setChildIndicatorPolicy(QTreeWidgetItem::ShowIndicator); 
+    dirItems[path] = item;
 }
 
 
