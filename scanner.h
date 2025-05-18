@@ -48,7 +48,7 @@ public slots:
         QThreadPool::globalInstance()->start(new ScanTask(path, isStopped, this));
     }
     void stopScan(){
-        isStopped = true;
+        isStopped.store(true);
         QThreadPool::globalInstance()->waitForDone();
     }
 signals:
